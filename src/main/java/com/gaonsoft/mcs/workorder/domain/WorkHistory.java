@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -74,22 +75,21 @@ public class WorkHistory implements Serializable {
 	})
 	private WorkOrder workOrder;
 	
-	@OneToMany(targetEntity=Production.class, fetch=FetchType.EAGER)
-	@NotFound(action = NotFoundAction.IGNORE)
-//	@Where(clause="PRODUCTION_DT >= PRODUCTION_DT")
-	@JoinColumns({ 
-		@JoinColumn(name="EQUIPMENT_ID", referencedColumnName="EQUIPMENT_ID", insertable=false, updatable=false, nullable=true),
-		@JoinColumn(name="COMP_SEQ", referencedColumnName="COMP_SEQ", insertable=false, updatable=false, nullable=true)
-	})
-	private List<Production> production;
-
-	public void setProduction(List<Production> production) {
-		this.production = production;
-	}
-	
-	public List<Production> getProduction() {
-		return production;
-	}
+//	@OneToMany(targetEntity=Production.class, fetch=FetchType.EAGER)
+//	@NotFound(action = NotFoundAction.IGNORE)
+//	@JoinColumns({ 
+//		@JoinColumn(name="EQUIPMENT_ID", referencedColumnName="EQUIPMENT_ID", insertable=false, updatable=false, nullable=true),
+//		@JoinColumn(name="COMP_SEQ", referencedColumnName="COMP_SEQ", insertable=false, updatable=false, nullable=true)
+//	})
+//	private List<Production> production;
+//
+//	public void setProduction(List<Production> production) {
+//		this.production = production;
+//	}
+//	
+//	public List<Production> getProduction() {
+//		return production;
+//	}
 	
 	public Long getCompSeq() {
 		return compSeq;
@@ -153,8 +153,8 @@ public class WorkHistory implements Serializable {
 
 	@Override
 	public String toString() {
-		return "WorkHistory [compSeq=" + compSeq + ", workHisSeq=" + workHisSeq + ", workOrderNo=" + workOrderNo
+		return "\nWorkHistory [compSeq=" + compSeq + ", workHisSeq=" + workHisSeq + ", workOrderNo=" + workOrderNo
 				+ ", toolId=" + toolId + ", workerId=" + workerId + ", startDt=" + startDt + ", workOrder=" + workOrder
-				+ ", production=" + production + "]\n";
+				+ "]";
 	}
 }

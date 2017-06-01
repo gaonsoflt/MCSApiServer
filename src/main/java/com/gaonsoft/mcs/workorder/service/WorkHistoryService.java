@@ -11,5 +11,5 @@ public interface WorkHistoryService {
 
 	List<WorkHistory> getAllWorkHistories();
 
-	WorkHistory getLatestWorkHistoryByToolId(String toolId);
+	WorkHistory getLatestWorkByToolId(String toolId);
 }

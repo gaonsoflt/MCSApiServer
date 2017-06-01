@@ -1,5 +1,6 @@
 package com.gaonsoft.mcs.workorder.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gaonsoft.mcs.workorder.domain.ProductionSum;
 import com.gaonsoft.mcs.workorder.domain.WorkOrder;
 import com.gaonsoft.mcs.workorder.service.WorkOrderService;
 
@@ -50,5 +52,14 @@ public class RestWorkOrderController {
 			return new ResponseEntity<List<WorkOrder>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<WorkOrder>>(result, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/production", method = RequestMethod.GET) 
+	public ResponseEntity<ProductionSum> selectWorkOrdersByOrderDate(@RequestParam(name="tool") String toolId, @RequestParam(name="start") long start) {
+		final ProductionSum result = workOrderService.getProductionSummary(toolId, new Timestamp(start));
+		if (result == null) {
+			return new ResponseEntity<ProductionSum>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<ProductionSum>(result, HttpStatus.OK);
 	}
 }

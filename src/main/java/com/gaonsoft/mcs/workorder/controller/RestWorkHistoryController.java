@@ -71,8 +71,8 @@ public class RestWorkHistoryController {
 	}
 	
 	@RequestMapping(value = "/history/equipments/{id}", method = RequestMethod.GET) 
-	public ResponseEntity<WorkHistory> selectLatestWorkHistoryByToolId(@PathVariable(name="id") String id) {
-		final WorkHistory result = workHistoryService.getLatestWorkHistoryByToolId(id);
+	public ResponseEntity<WorkHistory> selectLatestWorkByToolId(@PathVariable(name="id") String id) {
+		final WorkHistory result = workHistoryService.getLatestWorkByToolId(id);
 		if (result == null) {
 			return new ResponseEntity<WorkHistory>(HttpStatus.NO_CONTENT);
 		}
